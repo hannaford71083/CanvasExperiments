@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <canvas id="myCanvas" width="1024" height="800" style="border:1px solid #d3d3d3;">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+
+<script>
+
+
+    /*
+    LEARNING OUTCOMES
+
+	1st Prototype) Animate image
+	2nd Prototype) Number of images are tied to scroll action
+	3rd Prototype) canvas is as big as screen and set in fixed position below other text 
+	
+    */
+
+  
+	var canvas = document.getElementById('myCanvas');
+	var c = canvas.getContext('2d');
+	var imageObj = new Image();
+
+	
+	
+	/*
+	Create object with position , dimensions
+	add to array 
+	
+	*/
+	
+	function canvasObj( X,  Y,  Width,  Height,  path){
+		//position
+		this.x = X;
+		this.y = Y;
+		//dimensions
+		this.imgWidth = Width;
+		this.imgHeight = Height; 
+		//image object
+		this.imageObj = new Image();
+		this.imageObj.src = path;
+	}
+	
+	var canary = []; //CANvas ARraY
+	
+	
+	
+	
+	
+	window.cursorY;  
+	window.degrees = 0;
+	  
+	window.x = 300;
+	window.y = 300;
+	
+	window.imgWidth = 300;
+	window.imgHeight = 150;  
+	  
+	imageObj.src =   'my-little-pony.PNG'  //'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg'
+	
+	
+	// init objects
+	pony1 = new canvasObj(300, 300,  300, 150, 'my-little-pony.PNG' );
+	
+	pony2 = new canvasObj(0, 400,  300, 150, 'my-little-pony.PNG' );
+	
+	pony3 = new canvasObj(100, 500,  300, 150, 'my-little-pony.PNG' );
+	
+	
+	vader = new canvasObj(300, 300,  300, 150, 'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg' );
+	
+	
+	canary.push(pony1);
+	canary.push(pony2);
+	canary.push(pony3);
+	canary.push(vader);
+	
+	
+	
+	draw();
+	
+	function draw(){
+		c.fillStyle = '#FFFFFF'; //fill entire grid with white
+        c.fillRect(0, 0, canvas.width, canvas.height);
+		//drawImg();
+		drawImgs();
+		
+		setTimeout(draw, 0.1);
+	}
+		
+	
+	function drawImgs(){
+		//iterate array and draw each image
+		for(i in canary){
+			drawObj(canary[i]);
+		}
+		
+	}
+	
+	function drawObj(canObj){
+		var centerX = canObj.x - (canObj.imageObj.width / 2);
+		var centerY = canObj.y -  (canObj.imageObj.height / 2);
+		c.drawImage(canObj.imageObj, centerX, centerY, canObj.imgWidth, canObj.imgHeight );
+	}
+
+
+	
+	function drawImg(){
+		var centerX = window.x - (imageObj.width / 2);
+		var centerY = window.y -  (imageObj.height / 2);
+		c.drawImage(imageObj, centerX, centerY, window.imgWidth, window.imgHeight );
+	}
+	  
+	  
+	document.body.addEventListener('keydown', function (e){
+		//console.log(e.keyCode);
+		if(e.keyCode == 37){ //left
+			console.log("left");
+			window.x -= 5;
+			for(i in canary){
+				canary[i].x -= 5;
+			}
+		}
+		else if(e.keyCode == 38){ //up
+			console.log("up");
+			window.y -= 5;
+			for(i in canary){
+				canary[i].y -= 5;
+			}
+		}
+		else if(e.keyCode == 39){ //right
+			console.log("right");
+			window.x += 5;
+			for(i in canary){
+				canary[i].x += 5;
+			}
+		}
+		else if(e.keyCode == 40){// down
+			console.log("down");
+			window.y += 5;
+			for(i in canary){
+				canary[i].y += 5;
+			}
+		}
+		
+	});
+	  
+	  
+	  
+	  
+	  
+	  
+	  
+
+	  
+    imageObj.src =   'my-little-pony.PNG'  //'http://www.html5canvastutorials.com/demos/assets/darth-vader.jpg'
+	
+	
+
+
+	
+	
+	
+
+</script>
+
+</body>
+</html>

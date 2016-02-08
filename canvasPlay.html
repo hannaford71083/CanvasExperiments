@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+    <canvas id="myCanvas" width="700" height="700" style="border:1px solid #d3d3d3;">
+        Your browser does not support the HTML5 canvas tag.
+    </canvas>
+
+<script>
+
+
+    
+    //loop equation through all x coords
+
+    //var xStart = -300;
+    //var xFinish = 300;
+    //var y;
+
+    //var xOffset = 300;
+    //var yOffset = 100;
+
+    var c = document.getElementById("myCanvas");
+    var ctx = c.getContext("2d");
+
+
+
+    //cant do more than 6 curves, max ammount of points? 
+    //???? would SVG be better for this ????? 
+    for (var i = 300; i <= 360; i += 10) {
+
+        console.log("i = "+ i)
+        generatecurve(-300, 300, i, i);
+    }
+
+
+    function generatecurve(xStart, xFinish, xOffset, yOffset) {
+        var y;
+
+        //console.log("--->")
+
+        for (var x = xStart; x <= xFinish; x++) {
+
+            y = 0.01 * x * x; // y = 0.01 * x^2
+            //console.log("x = " + x + ", y = " + y);
+            if (x == xStart) {
+                ctx.moveTo(x + xOffset, y + yOffset);
+            }
+            else {
+                ctx.lineTo(x + xOffset, y + yOffset);
+                ctx.stroke();
+            }
+
+        }
+
+
+    }
+
+
+    //here is how to generate circular coords in js.....
+
+    //for (var i = 0; i < steps; i++) {
+    //    xValues[i] = (centerX + radius * Math.cos(2 * Math.PI * i / steps));
+    //    yValues[i] = (centerY + radius * Math.sin(2 * Math.PI * i / steps));
+    //}
+    //Start your loop at 0
+    //Step through the entire 2 * PI range, not just PI.
+    //You shouldn't have the var xValues = [centerX]; var yValues = [centerY]; -- the center of the circle is not a part of it.
+
+
+
+</script>
+
+</body>
+</html>
